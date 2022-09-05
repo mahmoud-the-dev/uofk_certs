@@ -1,14 +1,21 @@
 {%extends 'index.html' %} {% block content %}
-<h2>Log in</h2>
-<form method="POST" id="check_uni_num" action="">
+<form method="POST" id="check_uni_num" class="form-container login"action="">
     {% csrf_token %}
+    
+    
+    <h2>Log in</h2>
+    
+    <div class="form-group">
 
-    <label for="uni_num">Enter your university number</label>
-    <input name="uni_num" id="uni_num"></input>
-    <button type="submit">
-        submit
-    </button>
+      <label for="uni_num">Enter your university number:</label>
+      <input type="text" class="form-control" id="uni_num" placeholder="Enter  the university number" name="uni_num" required>
+    
+    <button type="submit" class="btn btn-primary mt-4">Submit</button>
+
 </form>
+
+
+
 
 <script type="text/javascript">
     const check_uni_num = document.getElementById("check_uni_num")
@@ -36,7 +43,7 @@
                     <h4>${content}</h4>
                     <div class="buttons">
                         <button type="reset" id="reset"> go back </button>
-                        ${ done && `<button type="submit" onclick="check_uni_num.submit()" > submit </button>` }
+                        ${ done ? `<button type="submit" onclick="check_uni_num.submit()" > submit </button>`:'' }
                         </div>
                         </div>
     `

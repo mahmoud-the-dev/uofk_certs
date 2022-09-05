@@ -1,7 +1,4 @@
-body {
-	background-color: #aaa;
-}
-
+/* pop up stuff */
 .popup {
 	position: fixed;
 	z-index: 10;
@@ -51,4 +48,117 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 2rem;
+}
+
+/* nav-bar stuff */
+
+.vertical-bar {
+	max-height: 2em;
+	width: 100%;
+	background-color: aliceblue;
+	padding: 3em;
+	display: flex;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+}
+
+.vertical-bar .logo {
+	/* margin: auto; */
+    /* margin-top: 0; */
+    display: block;
+    max-width: 5em;
+}
+
+.vertical-nav {
+    min-height:2rem;
+    background-color:#333333;
+}
+
+.container {
+    padding: 2em 4em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+	margin: 10px;
+}
+.login {
+	max-width: 45%;
+	padding-right: 160px;
+	padding-left: 120px;
+	margin: auto;
+}
+.bottomright {
+	position: absolute;
+	bottom: 8px;
+	right: 16px;
+}
+h1 {
+	margin-left: 90px;
+}
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+}
+
+li {
+	float: left;
+}
+
+li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+li a:hover:not(.active) {
+	background-color: #111;
+}
+
+.active {
+	background-color: darkcyan;
+}
+
+/* center screen */
+
+body {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    min-height:100%;
+}
+
+.view {
+    min-height: 100%;
+    display:flex;
+    align-self: center;
+    /* background-color: #222 */
+}
+
+/* Form conatiner */
+
+.form-container{
+    min-width: 20em;
+    margin: auto
+}
+.form-container.login{
+    padding: 7em 0;
+    margin: auto
+}
+
+
+h1{
+    padding: 2rem 0;
+}
+
+h2{
+    padding: 1rem 0;
+}
+
+.btn{
+    margin: 1rem 1rem 1rem 0rem;
 }

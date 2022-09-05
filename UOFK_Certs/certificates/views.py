@@ -1,6 +1,7 @@
+from multiprocessing import context
 from os import name
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 
 
@@ -26,5 +27,10 @@ def trackCertReq(request):
     return render(request, 'certificates/track_cert_req.html')
 
 
-def makeRequest(request):
-    pass
+def createReq(request,uni_num):
+
+    student = Student.objects.get(university_number=uni_num)
+
+    context= {'student':student}
+
+    return render(request,'certificates/req_form.html')
