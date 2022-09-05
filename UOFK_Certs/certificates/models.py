@@ -44,7 +44,7 @@ class CompletedLevel(models.Model):
     student = models.ForeignKey(Student,on_delete=models.CASCADE)# ForeignKey
     level = models.ForeignKey(Level,on_delete=models.CASCADE)#ForeignKey
     def __str__(self):
-        return self.level
+        return str(self.level) + " " + str(self.student)
 
 
 class CertificateRequest(models.Model):
@@ -72,6 +72,7 @@ class Bill(models.Model):
         return self.request
 
 
+
 class Notification(models.Model):
     bill = models.ForeignKey(Bill,on_delete=models.CASCADE, blank=True, null=True)# ForeignKey
     request = models.ForeignKey(CertificateRequest,on_delete=models.CASCADE,blank=True,null=True)# ForeignKey
@@ -90,6 +91,8 @@ class CertificateItem(models.Model):
     card_board = models.BooleanField(default=False)
     colored = models.BooleanField(default=True)
     price = models.DecimalField(max_digits=9, decimal_places=2)
+    def __str__(self):
+        return self.level + ' | | ' + self.certificate_type +' || '+ self.request
 
 
 class LevelTypeLink(models.Model):
@@ -97,10 +100,12 @@ class LevelTypeLink(models.Model):
     certificate_type = models.ForeignKey(CertificateType, on_delete=models.DO_NOTHING)# ForeignKey
     price = models.DecimalField(max_digits=9, decimal_places=2)
     def __str__(self):
-        return self.level + ' | | ' + self.certificate_type
+        return str(self.level) + ' | | ' + str(self.certificate_type)
 
 
 class TypeLanguage(models.Model):
     certificate_type = models.ForeignKey(CertificateType,on_delete=models.CASCADE)# ForeignKey
     language = models.ForeignKey(Language,on_delete=models.CASCADE)# ForeignKey
+    def __str__(self):
+        return str(self.certificate_type) + ' | | ' + str(self.language)
 

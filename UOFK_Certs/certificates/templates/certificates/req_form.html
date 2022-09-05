@@ -1,4 +1,28 @@
-{% extends 'index.html' %}
-{% block content %}
-    <h1>Welcome !</h1>
+{% extends 'index.html' %} {% block content %}
+
+<form method="POST" id="check_uni_num" class="form-container" action="">
+	{% csrf_token %}
+
+	<h2>NEW REQUEST</h2>
+
+	<div class="form-group">
+		<select class="form-select" aria-label="Default select example">
+			<option selected>Open this select menu</option>
+			{% for level in levels %}
+			<option value="{{level.0}}">{{level.0}}</option>
+			{% endfor %}
+		</select>
+	</div>
+
+	<div class="form-group">
+		<select class="form-select" aria-label="Default select example">
+			<option selected>Open this select menu</option>
+			{% for level in levels %} {% for type in level.1 %}
+			<option value="{{type.0}}">{{type.0}}</option>
+			{% endfor %} {% endfor %}
+		</select>
+	</div>
+	<button type="submit" class="btn btn-primary mt-4">Submit</button>
+</form>
+
 {%endblock %}
