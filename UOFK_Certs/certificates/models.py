@@ -84,12 +84,15 @@ class Notification(models.Model):
 
 
 class CertificateItem(models.Model):
+    STATUS= (('wfp','waiting for payment'),('ip','in_process'),('rd','ready'),('rcv','received'))
+
     request = models.ForeignKey(CertificateRequest,on_delete=models.CASCADE)# ForeignKey
+    status = models.CharField(max_length=55, choices=STATUS, default=('wfp','waiting for payment'))
     level = models.ForeignKey(Level,on_delete=models.DO_NOTHING)# ForeignKey
     certificate_type = models.ForeignKey('CertificateType',on_delete=models.DO_NOTHING)# ForeignKey
     language = models.ForeignKey('Language',on_delete=models.DO_NOTHING)# ForeignKey
     card_board = models.BooleanField(default=False)
-    colored = models.BooleanField(default=True)
+    colored = models.BooleanField(default=False)
     price = models.DecimalField(max_digits=9, decimal_places=2)
     def __str__(self):
         return self.level + ' | | ' + self.certificate_type +' || '+ self.request

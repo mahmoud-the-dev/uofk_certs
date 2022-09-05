@@ -33,6 +33,24 @@ def createReq(request):
     student = Student.objects.get(pk=uni_num)
 
 
+    if request.method == 'POST':
+        post_data = request.POST
+        req = CertificateRequest(student=student,count=post_data['quantity'])
+        level = Level.objects.get(level=post_data['level'])
+
+        lang = Language.objects.get(language=post_data['lang'])
+        type = CertificateType.objects.get(type=post_data['type'])
+
+        typelang= LevelTypeLink.objects.filter(certificate_type=type,level=level)
+
+        price=typelang[0].price
+
+        item = CertificateItem(level=level,language=lang,certificate_type = type,request=req,price = price)
+        req.save()
+        item.save()
+        return (redirect ('/'))
+
+
     completed_levels = student.completedlevel_set.all()
 
     levels = []
@@ -52,6 +70,8 @@ def createReq(request):
             this_types.append(dict1)
         dict2 = [this_level,this_types]
         levels.append(dict2)
+
+    
 
     context= {'levels':levels}
     return render(request,'certificates/req_form.html',context=context)

@@ -2,27 +2,141 @@
 
 <form method="POST" id="check_uni_num" class="form-container" action="">
 	{% csrf_token %}
-
 	<h2>NEW REQUEST</h2>
 
 	<div class="form-group">
-		<select class="form-select" aria-label="Default select example">
-			<option selected>Open this select menu</option>
-			{% for level in levels %}
-			<option value="{{level.0}}">{{level.0}}</option>
-			{% endfor %}
+		<select
+			class="form-select"
+			id="levelsDrop"
+			name="level"
+			aria-label="Default select"
+		>
+			<option selected>select level</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<select
+			class="form-select"
+			level=""
+			name="type"
+			id="typesDrop"
+			aria-label="Default select"
+		>
+			<option selected>select type</option>
 		</select>
 	</div>
 
 	<div class="form-group">
-		<select class="form-select" aria-label="Default select example">
-			<option selected>Open this select menu</option>
-			{% for level in levels %} {% for type in level.1 %}
-			<option value="{{type.0}}">{{type.0}}</option>
-			{% endfor %} {% endfor %}
+		<select
+			class="form-select"
+			name="lang"
+			id="langDrop"
+			aria-label="Default select"
+		>
+			<option selected>select language</option>
 		</select>
 	</div>
+
+	<div class="form-check">
+		<input
+			name="colored"
+			class="form-check-input"
+			type="checkbox"
+			value="colored"
+			id="flexCheckDefault"
+			checked
+		/>
+		<label class="form-check-label" for="flexCheckDefault"> Colored </label>
+	</div>
+	<div class="form-check">
+		<input
+			name="quantity"
+			class="form-check-input"
+			type="number"
+			value="1"
+			label="count"
+			id="amount"
+		/>
+		<label class="form-check-label" for="amount"> quantity</label>
+	</div>
+
 	<button type="submit" class="btn btn-primary mt-4">Submit</button>
 </form>
+
+<script type="text/javascript">
+	let data = [];
+	let level_type = [];
+	let type_langs = [];
+	let types = [];
+	let langs = [];
+	("{% for level in levels %}");
+	level = "{{level.0}}";
+	type_langs = [];
+	("{% for type_langs in level.1 %}");
+	type = "{{type_langs.0}}";
+	langs = [];
+	("{% for lang in type_langs.1 %}");
+	langs.push("{{lang}}");
+	("{% endfor %}");
+	type_langs.push([type, langs]);
+	("{% endfor %}");
+	level_type = [level, type_langs];
+	data.push(level_type);
+	(" {% endfor %}");
+	console.log(data);
+
+	const levelsDrop = document.getElementById("levelsDrop");
+	const typesDrop = document.getElementById("typesDrop");
+	const langsDrop = document.getElementById("langDrop");
+	let option = "";
+
+	data.map((level) => {
+		// option = `<option value="${level}">${level}</option>`;
+		option = document.createElement("option");
+		option.setAttribute("value", level[0]);
+		option.innerHTML = `${level[0]}`;
+		levelsDrop.appendChild(option);
+	});
+
+	const show_lang = (x) => {
+		langsDrop.innerHTML = "<option selected>select language</option>";
+		level = x.target.getAttribute("level");
+
+		const findlangs = (l) => (x.target.value === l[0] ? l[1] : -1);
+
+		const findlevel = (level_type) => {
+			if (level_type[0] === level) {
+				types = level_type[1];
+				langs = types.find(findlangs)[1];
+				langs.map((lang) => {
+					option = document.createElement("option");
+					option.setAttribute("value", lang);
+					option.innerHTML = `${lang}`;
+					langsDrop.appendChild(option);
+				});
+			} else "NOT FOUND";
+		};
+		types = data.find(findlevel);
+	};
+
+	const show_types = (x) => {
+		typesDrop.innerHTML = `<option selected>select level</option>`;
+		typesDrop.setAttribute("level", x.target.value);
+		const findlevel = (level_type) => {
+			if (level_type[0] === x.target.value) {
+				return level_type[1];
+			} else "NOT FOUND";
+		};
+		types = data.find(findlevel)[1];
+		types.map((type) => {
+			option = document.createElement("option");
+			option.setAttribute("value", type[0]);
+			option.innerHTML = `${type[0]}`;
+			typesDrop.appendChild(option);
+		});
+	};
+	levelsDrop.addEventListener("change", show_types);
+	typesDrop.addEventListener("change", show_lang);
+</script>
 
 {%endblock %}
