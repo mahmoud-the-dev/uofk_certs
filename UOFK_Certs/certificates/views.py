@@ -3,7 +3,7 @@ from os import name
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
-
+import datetime
 
 def home(request):
     return render(request, 'certificates/home.html')
@@ -46,9 +46,12 @@ def createReq(request):
         price=typelang[0].price
 
         item = CertificateItem(level=level,language=lang,certificate_type = type,request=req,price = price)
+        bill = Bill(request=req,bill_price=price)
         req.save()
         item.save()
-        return (redirect ('/'))
+        bill.save()
+        request.session['bill_code'] = str(bill.bill_code)
+        return (redirect ('/show_bill'))
 
 
     completed_levels = student.completedlevel_set.all()
@@ -75,3 +78,11 @@ def createReq(request):
 
     context= {'levels':levels}
     return render(request,'certificates/req_form.html',context=context)
+
+def showBill(request):
+    print (request.session['bill_code'])
+    code = request.session['bill_code']
+
+    price = Bill.objects.get(pk=code).bill_price
+    context = {'code':code,'price':price}
+    return render(request ,'certificates/bill.html',context=context)

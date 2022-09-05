@@ -62,11 +62,11 @@ class CertificateRequest(models.Model):
 
 
 class Bill(models.Model):
-    bill_code= models.UUIDField(default=uuid.uuid4,unique=True,primary_key=True,editable=False)
+    bill_code= models.UUIDField(default=uuid.uuid4,unique=True,primary_key=True,editable=False,serialize=True)
     request = models.ForeignKey(CertificateRequest,on_delete=models.CASCADE)
     bill_price =models.DecimalField(max_digits=9, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
-    expiry_date = models.DateTimeField()
+    expiry_date = models.DateTimeField(null=True, blank=True)
     paid = models.BooleanField(default=False)
     def __str__(self):
         return self.request

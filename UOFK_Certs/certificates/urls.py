@@ -6,4 +6,5 @@ urlpatterns = [
     path('check_uni_num',views.universityNumberCheck,name='check uni-num'),
     path('check_tr-code',views.trackCertReq, name='check tr-code'),
     path('new_request',views.createReq, name='request form'),
+    path('show_bill',views.showBill, name='show bill'),
 ]
