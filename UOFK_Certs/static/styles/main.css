@@ -1,0 +1,54 @@
+body {
+	background-color: #aaa;
+}
+
+.popup {
+	position: fixed;
+	z-index: 10;
+	background-color: rgb(48, 8, 8, 0.3);
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.popup .recipe {
+	background-color: #eee;
+	border-radius: 5px;
+	max-width: 600px;
+	max-height: 100vh;
+	overflow: scroll;
+	padding: 1rem;
+	position: relative;
+	padding: 4rem;
+}
+
+.popup .recipe i {
+	position: absolute;
+	right: 2rem;
+	cursor: pointer;
+	font-size: 1.5rem;
+}
+
+.popup .recipe h4 {
+	text-align: center;
+	font-size: 2rem;
+	margin: 0;
+	text-transform: capitalize;
+}
+
+.popup .recipe p {
+	padding: 1rem;
+}
+.popup .buttons {
+	padding: 1rem;
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2rem;
+}

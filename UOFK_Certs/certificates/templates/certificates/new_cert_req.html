@@ -1,9 +1,61 @@
-<form action="">
+{%extends 'index.html' %} {% block content %}
+<h2>Log in</h2>
+<form method="POST" id="check_uni_num" action="">
+    {% csrf_token %}
 
     <label for="uni_num">Enter your university number</label>
-    <input name="uni_num" ></input>
+    <input name="uni_num" id="uni_num"></input>
     <button type="submit">
         submit
     </button>
 </form>
-    
+
+<script type="text/javascript">
+    const check_uni_num = document.getElementById("check_uni_num")
+    let x = false;
+    check_uni_num.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        const popupEL =  document.createElement("div");
+        popupEL.setAttribute("id", "popup");
+	    popupEL.classList.add("popup");
+        const uni_num =parseInt( document.getElementById("uni_num").value);
+        const verify =(uni_num,batch,name)=>{
+            x=true
+            content = `this is you? <br/> 
+            <samp>Name: </samp><strong>${name}</strong> <br/>
+            <samp>batch: </samp><strong>${batch}</strong> <br/>
+            <samp>university number: </samp><strong>${uni_num}</strong><br/>
+            `
+            return popup (content,true)
+        }
+        const setX = ()=>{x=false; return ''}
+        const popup = (content, done)=>{
+            popupEL.innerHTML = `
+                <div class="recipe">
+                    <i class="fas fa-times close"></i>
+                    <h4>${content}</h4>
+                    <div class="buttons">
+                        <button type="reset" id="reset"> go back </button>
+                        ${ done && `<button type="submit" onclick="check_uni_num.submit()" > submit </button>` }
+                        </div>
+                        </div>
+    `
+            const close = popupEL.querySelector("#reset");
+            close.addEventListener("click", () => {
+            check_uni_num.reset();
+		    popupEL.remove();
+	});
+            return ''
+        }
+        const notFound =()=>{
+            content ='NOT FOUND'
+            return popup(content,false);
+        }
+        const found = `{% for student in students %} ${uni_num == '{{student.university_number}}'? verify('{{student.university_number}}', '{{student.batch}}','{{student.name}}'):''}{%endfor %} ${x?setX():notFound()}`
+        const confirmation=found
+        document.body.appendChild(popupEL);
+    })
+
+</script>
+
+{% endblock %}
