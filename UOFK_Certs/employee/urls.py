@@ -8,7 +8,7 @@ urlpatterns = [
     path('employee/menu',views.menu,name='employee menu'),
     path('employee/certificate-settings',views.certificate_settings,name='certificate settings'),
     path('employee/certificate-requests',views.ManageCertificateRequests,name='certificate requests'),
-    path('employee/view-request',views.ViewRequest,name='view request'),
+    path('employee/view-request/<str:pk>',views.ViewRequest,name='view request'),
     path('employee/add-certificate',views.add_certificate,name='add certificate'),
     path('employee/update-certificate',views.update_certificate,name='update certificate'),
 ]

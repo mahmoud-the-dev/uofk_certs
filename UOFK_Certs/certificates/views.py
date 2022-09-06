@@ -1,9 +1,11 @@
 from multiprocessing import context
 from os import name
+from unicodedata import decimal
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 import datetime
+from decimal import Decimal
 
 def home(request):
     return render(request, 'certificates/home.html')
@@ -43,9 +45,9 @@ def createReq(request):
 
         typelang= LevelTypeLink.objects.filter(certificate_type=type,level=level)
 
-        price=typelang[0].price
+        price=typelang[0].price * Decimal(int(post_data['quantity']))
 
-        item = CertificateItem(level=level,language=lang,certificate_type = type,request=req,price = price)
+        item = CertificateItem(level=level,language=lang,certificate_type = type,request=req,price = price,quantity=post_data['quantity'])
         bill = Bill(request=req,bill_price=price)
         req.save()
         item.save()

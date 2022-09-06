@@ -33,10 +33,10 @@ def ManageCertificateRequests(request):
     return render(request, 'employee/requests.html',context)
 
 
-def ViewRequest(request):
-    certs = CertificateItem.objects.get() 
+def ViewRequest(request, pk):
+    req = CertificateRequest.objects.get(pk=pk) 
     context = {
-        'certs': certs
+        'req': req
     }
     return render(request, 'employee/request.html',context)
 

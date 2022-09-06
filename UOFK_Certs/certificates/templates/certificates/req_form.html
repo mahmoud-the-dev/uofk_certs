@@ -5,8 +5,9 @@
 	<h2>NEW REQUEST</h2>
 
 	<div class="form-group">
+		<label class="col-form-label" for="levelsDrop"> level :</label>
 		<select
-			class="form-select"
+			class="form-select form-control"
 			id="levelsDrop"
 			name="level"
 			aria-label="Default select"
@@ -15,8 +16,9 @@
 		</select>
 	</div>
 	<div class="form-group">
+		<label class="col-form-label" for="typesDrop"> type :</label>
 		<select
-			class="form-select"
+			class="form-select form-control"
 			level=""
 			name="type"
 			id="typesDrop"
@@ -27,14 +29,26 @@
 	</div>
 
 	<div class="form-group">
+		<label class="col-form-label" for="langDrop"> language</label>
 		<select
-			class="form-select"
+			class="form-select form-control"
 			name="lang"
 			id="langDrop"
 			aria-label="Default select"
 		>
 			<option selected>select language</option>
 		</select>
+	</div>
+	<div class="form-group">
+		<label class="col-form-label" for="amount"> quantity</label>
+		<input
+			name="quantity"
+			class="form-control"
+			type="number"
+			value="1"
+			aria-label="amount"
+			id="amount"
+		/>
 	</div>
 
 	<div class="form-check">
@@ -47,17 +61,6 @@
 			checked
 		/>
 		<label class="form-check-label" for="flexCheckDefault"> Colored </label>
-	</div>
-	<div class="form-check">
-		<input
-			name="quantity"
-			class="form-check-input"
-			type="number"
-			value="1"
-			label="count"
-			id="amount"
-		/>
-		<label class="form-check-label" for="amount"> quantity</label>
 	</div>
 
 	<button type="submit" class="btn btn-primary mt-4">Submit</button>

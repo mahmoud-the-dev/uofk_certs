@@ -92,6 +92,7 @@ class CertificateItem(models.Model):
     certificate_type = models.ForeignKey('CertificateType',on_delete=models.DO_NOTHING)# ForeignKey
     language = models.ForeignKey('Language',on_delete=models.DO_NOTHING)# ForeignKey
     card_board = models.BooleanField(default=False)
+    quantity = models.IntegerField(default=1)
     colored = models.BooleanField(default=False)
     price = models.DecimalField(max_digits=9, decimal_places=2)
     def __str__(self):
