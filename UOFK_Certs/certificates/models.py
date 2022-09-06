@@ -52,10 +52,10 @@ class CertificateRequest(models.Model):
     REQUEST_STATUS= (('wfp','waiting for payment'),('ip','in_process'),('rd','ready'),('rcv','received'))
 
     id = models.UUIDField(default=uuid.uuid4,unique=True,primary_key=True,editable=False)
-    student = models.ForeignKey(Student,on_delete=models.CASCADE)# ForeignKey
+    student = models.ForeignKey(Student,on_delete=models.CASCADE,editable=False)# ForeignKey
     request_status = models.CharField(max_length=55, choices=REQUEST_STATUS, default=('wfp','waiting for payment'))
     count = models.IntegerField(default=1)
-    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True,editable=False)
     tracking_code = models.UUIDField(default=uuid.uuid4,unique=True,editable=False)
     def __str__(self):
         return str(self.student)  + ' / ' +str(self.request_status) + ' /  '+str(self.count)+ ' /  ' +str(self.created_at)
@@ -69,7 +69,7 @@ class Bill(models.Model):
     expiry_date = models.DateTimeField(null=True, blank=True)
     paid = models.BooleanField(default=False)
     def __str__(self):
-        return self.request
+        return str(self.request)
 
 
 
@@ -95,7 +95,7 @@ class CertificateItem(models.Model):
     colored = models.BooleanField(default=False)
     price = models.DecimalField(max_digits=9, decimal_places=2)
     def __str__(self):
-        return self.level + ' | | ' + self.certificate_type +' || '+ self.request
+        return str(self.level )+ ' | | ' + str(self.certificate_type) +' || '+str( self.request)
 
 
 class LevelTypeLink(models.Model):
