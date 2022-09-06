@@ -1,0 +1,33 @@
+{% extends 'index.html' %} {%block content%}
+<div class="container">
+	<br />
+	<h2>Employee Passcode Login</h2>
+	<br />
+	<form action="p4.html" class="was-validated">
+		<p>Please Enter the passcode:</p>
+		<div class="form-group">
+			<label for="pwd">Passcode:</label>
+			<input
+				type="password"
+				class="form-control"
+				id="pwd"
+				placeholder="Enter password"
+				name="pswd"
+				required
+			/>
+			<div class="valid-feedback">Valid.</div>
+			<div class="invalid-feedback">Please fill out this field.</div>
+		</div>
+
+		<div style="border: solid black 3px; margin: 5px 170.25vh 5px 0px">
+			<a
+				href="{% url 'employee menu' %}"
+				style="text-decoration: none; color: black"
+			>
+				Submit
+			</a>
+		</div>
+	</form>
+</div>
+
+{%endblock content%}
