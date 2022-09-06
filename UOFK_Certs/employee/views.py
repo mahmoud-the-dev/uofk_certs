@@ -1,5 +1,5 @@
 from random import randint
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
@@ -8,26 +8,29 @@ from certificates.models import *
 
 
 def adlogin(request):
-    return render(request, 'employee/second_login.html')
+    if request.method == 'POST':
+        req = request.POST
+        return redirect('employee/passcode.html')
+    return render(request, 'employee/second-login.html')
 
 def verify(request):
     return render(request, 'employee/passcode.html')
 
-# @login_required(login_url='employee login')
+
 def home(request):
     return render(request, 'employee/first_login.html')
 
 def menu(request):
     return render(request, 'employee/employee_menu.html')
 
-# @login_required(login_url='employee login')
+
 def certificate_settings(request):
     return render(request, 'employee/certificate_settings.html')
 
 def ManageCertificateRequests(request):
     requests = CertificateRequest.objects.all()
     context = {'requests': requests}
-    return render(request, 'employee/.html',context)
+    return render(request, 'employee/requests.html',context)
 
 
 def ViewRequest(request):
@@ -37,10 +40,10 @@ def ViewRequest(request):
     }
     return render(request, 'employee/request.html',context)
 
-# @login_required(login_url='employee login')
+
 def add_certificate(request):
     return render(request, 'employee/new_certificate.html')
 
-# @login_required(login_url='employee login')
+
 def update_certificate(request):
     return render(request, 'employee/update_certificate.html')
