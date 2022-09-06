@@ -7,7 +7,7 @@ from django.views.generic import View
 from UOFK_Certs.certificates.models import CertificateItem, CertificateRequest
 
 
-from certificates.models import CertificateType
+
 
 
 
