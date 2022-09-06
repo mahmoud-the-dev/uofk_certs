@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 
 from django.views.generic import View
-from UOFK_Certs.certificates.models import CertificateItem, CertificateRequest
+from certificates.models import CertificateItem, CertificateRequest
 
 
 
