@@ -40,7 +40,6 @@ def ViewRequest(request, pk):
         post= request.POST
         print (post.keys())
         if post['certificate_status']:
-            print('HHHH')
             for cert in req.certificateitem_set.all():
                 cert.status = post['certificate_status']
                 cert.save()
