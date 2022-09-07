@@ -1,8 +1,56 @@
 {% extends 'index.html' %} {% block content %}
 
 <div class="container">
-	<br />
 	<h2>Add Certificate</h2>
-	<br />
+</div>
+<div class="container">
+	<form
+		action="{% url 'employee menu' %}"
+		method="POST"
+		class="was-validated"
+	>
+		{% csrf_token %}
+		<div class="form-group">
+			<label class="col-form-label" for="typesDrop"> enter level</label>
+
+			<input
+				name="quantity"
+				type="number"
+				value=""
+				id="amount"
+				class="form-control"
+			/>
+		</div>
+
+		<div class="form-group">
+			<label class="col-form-label" for="typesDrop"> enter type:</label>
+			<input
+				value="{{req.student}}"
+				class="form-control"
+				type="text"
+				name="type"
+			/>
+		</div>
+		<div class="form-group">
+			<label class="col-form-label" for="typesDrop">
+				select language
+			</label>
+			<select
+				class="form-select form-control"
+				level=""
+				name="req_status"
+				id="typesDrop"
+			>
+				<option value="" selected>change status</option>
+				<option value="waiting for payment">arabic</option>
+				<option value="in process">english</option>
+			</select>
+		</div>
+
+		<button class="btn btn-danger" type="submit">Submit changes</button>
+		<a class="btn btn-dark" href="{% url 'employee menu' %}" type="button">
+			go back
+		</a>
+	</form>
 </div>
 {% endblock content %}

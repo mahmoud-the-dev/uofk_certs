@@ -49,11 +49,11 @@ class CompletedLevel(models.Model):
 
 class CertificateRequest(models.Model):
 
-    REQUEST_STATUS= (('wfp','waiting for payment'),('ip','in_process'),('rd','ready'),('rcv','received'))
+    REQUEST_STATUS= (('waiting for payment','waiting for payment'),('in process','in process'),('ready','ready'),('received','received'))
 
     id = models.UUIDField(default=uuid.uuid4,unique=True,primary_key=True,editable=False)
     student = models.ForeignKey(Student,on_delete=models.CASCADE,editable=False)# ForeignKey
-    request_status = models.CharField(max_length=55, choices=REQUEST_STATUS, default=('wfp','waiting for payment'))
+    request_status = models.CharField(max_length=55, choices=REQUEST_STATUS, default=('waiting for payment'))
     count = models.IntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True, null=True,editable=False)
     tracking_code = models.UUIDField(default=uuid.uuid4,unique=True,editable=False)
@@ -84,10 +84,10 @@ class Notification(models.Model):
 
 
 class CertificateItem(models.Model):
-    STATUS= (('wfp','waiting for payment'),('ip','in_process'),('rd','ready'),('rcv','received'))
+    STATUS= (('waiting for payment','waiting for payment'),('in process','in process'),('ready','ready'),('received','received'))
 
     request = models.ForeignKey(CertificateRequest,on_delete=models.CASCADE)# ForeignKey
-    status = models.CharField(max_length=55, choices=STATUS, default=('wfp','waiting for payment'))
+    status = models.CharField(max_length=55, choices=STATUS, default=('waiting for payment'))
     level = models.ForeignKey(Level,on_delete=models.DO_NOTHING)# ForeignKey
     certificate_type = models.ForeignKey('CertificateType',on_delete=models.DO_NOTHING)# ForeignKey
     language = models.ForeignKey('Language',on_delete=models.DO_NOTHING)# ForeignKey

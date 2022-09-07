@@ -1,6 +1,7 @@
 {% extends 'index.html' %} {% block content %}
 <div class="container">
 	<form action="" method="POST" class="was-validated">
+		{% csrf_token %}
 		<div class="form-group">
 			<input
 				name="quantity"
@@ -29,14 +30,14 @@
 			<select
 				class="form-select form-control"
 				level=""
-				name="certificate_status"
+				name="req_status"
 				id="typesDrop"
 			>
-				<option selected>change status</option>
-				<option value="wfp">waiting for payment</option>
-				<option value="ip">in process</option>
-				<option value="rd">ready</option>
-				<option value="rcv">received</option>
+				<option value="" selected>change status</option>
+				<option value="waiting for payment">waiting for payment</option>
+				<option value="in process">in process</option>
+				<option value="ready">ready</option>
+				<option value="received">received</option>
 			</select>
 		</div>
 
@@ -76,17 +77,24 @@
 				id="typesDrop"
 				aria-label="Default select"
 			>
-				<option selected>change status</option>
-				<option value="wfp">waiting for payment</option>
-				<option value="ip">in process</option>
-				<option value="rd">ready</option>
-				<option value="rcv">received</option>
+				<option value="" selected>change status</option>
+				<option value="waiting for payment">waiting for payment</option>
+				<option value="in process">in process</option>
+				<option value="ready">ready</option>
+				<option value="received">received</option>
 			</select>
 		</div>
 
 		{% endfor %}
 
 		<button class="btn btn-danger" type="submit">Submit changes</button>
+		<a
+			class="btn btn-dark"
+			href="{% url 'certificate requests' %}"
+			type="button"
+		>
+			go back
+		</a>
 	</form>
 </div>
 {% endblock content %}

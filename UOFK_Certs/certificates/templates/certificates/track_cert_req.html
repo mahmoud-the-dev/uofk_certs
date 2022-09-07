@@ -1,11 +1,11 @@
 {%extends 'index.html' %} {% block content %}
 
-<form action="">
-    <label for="uni_num">Enter the tracking code</label>
-    <input name="trcode" ></input>
-    <button type="submit">
-        submit
-    </button>
+<form action="{% url 'home' %}">
+	<div class="form-group">
+		<label for="uni_num">Enter the tracking code:</label>
+		<input name="trcode" class="form-control" />
+	</div>
+	<button type="submit">submit</button>
 </form>
 
 {% endblock %}
