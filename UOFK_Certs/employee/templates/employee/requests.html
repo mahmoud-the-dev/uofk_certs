@@ -1,0 +1,16 @@
+{% extends 'index.html' %} {%block content%}
+<div class="container">
+	<br />
+	<h2>Certificates Requests Management</h2>
+	<br />
+	{% for request in requests %}
+	<a
+		href="{%url 'view request' request.pk %}"
+		class="btn btn-info active btn-block menu-choices"
+		role="button"
+		>{{ request.student.name }} || {{request.created_at}}</a
+	>
+	{% endfor %}
+</div>
+
+{% endblock content %}

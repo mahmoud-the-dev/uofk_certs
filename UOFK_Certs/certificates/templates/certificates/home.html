@@ -1,0 +1,12 @@
+{%extends 'index.html' %} {% block content %}
+
+<h1>WELCOME TO CERTIFICATE ISSUANCE APP</h1>
+
+<!-- <a href="{% url 'check uni-num' %}">new certificate request</a> <br />
+<a href="{% url 'check tr-code'%}">track certificate request</a> -->
+
+<h2>student Menu</h2>
+	<a href="{% url 'check uni-num' %}" class="btn btn-info active btn-block menu-choices" role="button">Request certificate </a>
+	<a href="{% url 'check tr-code'%}" class="btn btn-info active btn-block menu-choices" role="button">track certificate </a>
+
+{% endblock content %}

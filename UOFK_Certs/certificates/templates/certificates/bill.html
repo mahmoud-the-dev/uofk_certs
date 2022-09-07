@@ -1,0 +1,12 @@
+{% extends 'index.html' %} {% block content %}
+
+<div class="container">
+	<h2>The bill code is:</h2>
+	<p>{{code}}</p>
+	<br />
+	<p>price: <strong>{{price}}</strong></p>
+
+	<a href="{% url 'home'%}" class="btn-primary btn">Go Home</a>
+</div>
+
+{% endblock content %}

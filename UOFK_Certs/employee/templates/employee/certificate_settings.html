@@ -1,0 +1,19 @@
+{% extends 'index.html' %} {% block content %}
+<div class="container">
+	<br />
+	<h2>Certificate Settings</h2>
+	<br />
+	<a
+		href="{%url 'add certificate'%}"
+		class="btn btn-info active btn-block menu-choices"
+		role="button"
+		>Add Certificate</a
+	>
+	<a
+		href="{%url  'update certificate'%}"
+		class="btn btn-info active btn-block menu-choices"
+		role="button"
+		>Update Certificate</a
+	>
+</div>
+{% endblock content %}
